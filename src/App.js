@@ -1,11 +1,14 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Navbar from './components/Navbar';
+import {BrowserRouter as Router } from 'react-router-dom'
 
 function App() {
   return (
-    <h2>
+    <Router>
+      <Navbar/>
       Portfolio project ...
-    </h2>
+    </Router>
   );
 }
 
