@@ -6,7 +6,8 @@ import {faBars} from '@fortawesome/free-solid-svg-icons'
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        // navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark scrolling-navbar">
             <div className="container">
                 <Link className="navbar-brand" to="/"><img className="logo" src={myLogo} alt="Logo"/></Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
