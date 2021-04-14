@@ -1,11 +1,15 @@
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Home from './components';
+import Navbar from './components/Navbar';
+import {BrowserRouter as Router,Route} from 'react-router-dom'
 
 function App() {
   return (
-    <h2>
-      Portfolio project ...
-    </h2>
+    <CssBaseline>
+      <Home/>
+      
+    </CssBaseline>
   );
 }
 
