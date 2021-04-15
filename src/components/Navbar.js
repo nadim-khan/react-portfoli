@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import MobileRightMenuSlider from '@material-ui/core/Drawer';
+import SwipeableDrawer  from '@material-ui/core/SwipeableDrawer';
+
 import {
     AppBar,
     Toolbar,
@@ -23,13 +24,15 @@ import {
     ContactMail
 } from "@material-ui/icons"
 import avatar from "../avatar.png"
+import Footer from './Footer';
 
 // CSS STYLES
 const useStyles = makeStyles(theme=>({
     menuSliderContainer: {
-        width: 250,
+        width: '100vw',
         background: "black",
-        height: "100%"
+        height: "100%",
+        // borderLeft:'2px solid #b5dae4'
     },
     avatar: {
         display: "block",
@@ -37,8 +40,11 @@ const useStyles = makeStyles(theme=>({
         width: theme.spacing(13),
         height: theme.spacing(13)
     },
+    list:{
+
+    },
     listItem: {
-        color: "#7fc8db"
+        color: "#b5dae4"
     }
 
 }));
@@ -58,15 +64,18 @@ const menuItems = [
     },
     {
         listIcon: <Apps/>,
-        listText: "Portfolio"
+        listText: "Portfolio",
+        listPath:'/portfolio'
     },
+    // {
+    //     listIcon: <ContactMail/>,
+    //     listText: "Projects",
+    //     listPath:'/projects'
+    // },
     {
         listIcon: <ContactMail/>,
-        listText: "Projects"
-    },
-    {
-        listIcon: <ContactMail/>,
-        listText: "Contacts"
+        listText: "Contacts",
+        listPath:'/contact'
     }
 ]
 
@@ -87,13 +96,13 @@ const toggleSlider = (slider, open) => () => {
         <Box className={classes.menuSliderContainer} component="div" onClick={toggleSlider(slider,false)}>
             <Avatar className={classes.avatar} src={avatar} alt="Glenn Java" />
             <Divider/>
-            <List>
-                {menuItems.map((lsItem, key) => (
-                    <ListItem button key={key}>
+            <List className={classes.list}>
+                {menuItems.map((listItem, key) => (
+                    <ListItem button key={key} component={Link} to={listItem.listPath}>
                         <ListItemIcon className={classes.listItem}>
-                            {lsItem.listIcon}
+                            {listItem.listIcon}
                         </ListItemIcon>
-                        <ListItemText className={classes.listItem} primary={lsItem.listText} />
+                        <ListItemText className={classes.listItem} primary={listItem.listText} />
                     </ListItem>
                 ))} 
             </List>
@@ -108,9 +117,10 @@ const toggleSlider = (slider, open) => () => {
                             <ArrowBack style={{color: "#61dafb"}}/>                    
                         </IconButton>
                         <Typography variant="h5" style={{color:"#7fc8db"}}>Portfolio</Typography>
-                        <MobileRightMenuSlider anchor="right" open={state.right} onClose={toggleSlider("right", false)}>
+                        <SwipeableDrawer anchor="left" open={state.right}  onOpen={toggleSlider("right", true)} onClose={toggleSlider("right", false)}>
                             {sideList("right")}
-                        </MobileRightMenuSlider>
+                            <Footer/>
+                        </SwipeableDrawer>
                     </Toolbar>
                 </AppBar>
             </Box>
