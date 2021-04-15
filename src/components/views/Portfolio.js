@@ -10,6 +10,8 @@ import {
     CardMedia,
     IconButton 
 } from "@material-ui/core"
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
 import ShareIcon from '@material-ui/icons/Share';
 import ScreenShareIcon from '@material-ui/icons/ScreenShare';
 import project1 from '../../images/html-css-javascript-lg.jpg';
@@ -37,45 +39,57 @@ const useStyle = makeStyles(theme=>({
 
  const projects =[
      {
-         name:'HTML CSS JS',
-         description:'BASIC Frontend Development',
+         name:'Gymnasium',
+         description:'App for Gym created Using Angular 8, Mongo ,Node,ExpressJS',
          imageUrl:`${project1}`,
-         isDeployed:false
+         gitUrl:'https://github.com/nadim-khan/Gymnasium',
+         appUrl:'https://trainmenow.herokuapp.com/',
+         isDeployed:true
      },
-     {
-        name:'HTML CSS JS Basics',
-        description:'Desc1',
-        imageUrl:`${project2}`,
-        isDeployed:false
-    },
-    {
-        name:'JS Full Stack',
-        description:'Desc1',
-        imageUrl:`${project3}`,
-        isDeployed:false
-    },
     {
         name:'MERN App',
-        description:'Desc1',
+        description:'Portfolio',
         imageUrl:`${project4}`,
+        gitUrl:'https://github.com/nadim-khan/react-portfoli',
+        appUrl:'https://trainmenow.herokuapp.com/',
         isDeployed:true
     },
     {
-        name:'React Redux',
-        description:'Desc1',
-        imageUrl:`${project5}`,
+        name:'File Share App',
+        description:'File Sharing platform -created Using React ,Node,Mongo and Express js',
+        imageUrl:`${project4}`,
+        gitUrl:'',
+        appUrl:'https://tosharefile.herokuapp.com/',
         isDeployed:true
     },
     {
         name:'React Concepts',
-        description:'Desc1',
-        imageUrl:`${project6}`,
+        description:'All the react concepts from Basics to advance',
+        imageUrl:`${project5}`,
+        gitUrl:'https://github.com/nadim-khan/reactBasics',
+        appUrl:'',
         isDeployed:false
     },
  ]
 
+ function TransitionUp(props) {
+    return <Slide {...props} direction="up" />;
+  }
+
 const Portfolio = () => {
-    const classes = useStyle()
+    const classes = useStyle();
+    const [snackOpen, setSnackOpen] = React.useState(false);
+    const [transition, setTransition] = React.useState(undefined);
+  
+    const handleClick = (Transition) => () => {
+      setTransition(() => Transition);
+      navigator.clipboard.writeText(transition)
+      setSnackOpen(true);
+    };
+  
+    const handleClose = () => {
+        setSnackOpen(false);
+    };
     return (
         <>
             <Box component='div' className={classes.mainContainer}>
@@ -96,14 +110,22 @@ const Portfolio = () => {
                                 </CardContent>
                                 <CardActions>
                                     <IconButton aria-label="share" size="small" color="primary">
-                                        <ShareIcon />
+                                        <ShareIcon onClick={handleClick(TransitionUp)} />
                                     </IconButton>
-                                    {project.isDeployed ? <IconButton aria-label="Live Demo" size="medium" color="secondary">
+                                    {project.isDeployed ? <IconButton aria-label="Live Demo" size="medium" color="secondary" onClick={()=> window.open(`${project.appUrl}`, "_blank")}>
                                         <ScreenShareIcon />
                                     </IconButton> : 
                                     <></>
                                     }
                                 </CardActions>
+                                <Snackbar
+                                    open={snackOpen}
+                                    onClose={handleClose}
+                                    TransitionComponent={transition}
+                                    message="Link Copied"
+                                    autoHideDuration={6000}
+                                    key={transition ? transition.name : ''}
+                                />
                         </Card>
                     </Grid>
                     )}
