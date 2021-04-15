@@ -24,6 +24,7 @@ import {
     ContactMail
 } from "@material-ui/icons"
 import avatar from "../avatar.png"
+import logo from "../logo.png"
 import Footer from './Footer';
 
 // CSS STYLES
@@ -34,11 +35,17 @@ const useStyles = makeStyles(theme=>({
         height: "100%",
         justifyContent:"center"
     },
+    logo:{
+        display: "block",
+        margin: " auto 0.5rem",
+        width: theme.spacing(7),
+        height: theme.spacing(7)
+    },
     avatar: {
         display: "block",
         margin: "0.5rem auto",
         width: theme.spacing(13),
-        height: theme.spacing(13)
+        height: theme.spacing(13),
     },
     listItem: {
         color: "#b5dae4"
@@ -69,11 +76,6 @@ const menuItems = [
     },
     {
         listIcon: <ContactMail/>,
-        listText: "Projects",
-        listPath:'/projects'
-    },
-    {
-        listIcon: <ContactMail/>,
         listText: "Contacts",
         listPath:'/contact'
     }
@@ -94,7 +96,7 @@ const toggleSlider = (slider, open) => () => {
     const sideList = slider => (
 
         <Box className={classes.menuSliderContainer} component="div" onClick={toggleSlider(slider,false)}>
-            <Avatar className={classes.avatar} src={avatar} alt="Glenn Java" />
+            <Avatar className={classes.avatar} src={avatar} component={Link} to="/" alt="Nadeem Khan" />
             <Divider/>
             <List>
                 {menuItems.map((listItem, key) => (
@@ -106,7 +108,7 @@ const toggleSlider = (slider, open) => () => {
                     </ListItem>
                 ))} 
             </List>
-            
+
         </Box> 
     )
     return (
@@ -114,8 +116,8 @@ const toggleSlider = (slider, open) => () => {
             <Box component="nav">
                 <AppBar position ="static" style={{background: "#222"}}>
                     <Toolbar>
-                        
-                        <Typography variant="h5" style={{color:"#7fc8db",flex:1}}>Nadeem Khan</Typography>
+                        <Avatar className={classes.logo} src={logo} alt="Nadeem Khan" />
+                        <Typography variant="h5" style={{color:"#7fc8db",flex:1}}></Typography>
                         <MobileRightMenuSlider anchor="right" open={state.right} onClose={toggleSlider("right", false)}>
                             {sideList("right")}
                             <Footer/>

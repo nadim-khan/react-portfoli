@@ -2,13 +2,28 @@ import React from 'react'
 import {makeStyles} from '@material-ui/core/styles';
 import {
     Typography,
-    Box
+    Box,
+    Fab
 } from "@material-ui/core"
 import Navbar from '../Navbar';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 // CSS Styles
 const useStyle = makeStyles(theme=>({
     mainContainer:{
-        background:'#222'
+        background:'#222',
+        paddingBottom:'2.75rem'
+    },
+    download:{
+        bottom:'1.75rem',
+        position:'fixed',
+        left:'1rem',
+        right:'1rem',
+        width:'calc(100% - 2rem)',
+        background:'#61dafb',
+        fontSize:'1.2rem',
+        '&:hover':{
+            background:'#61dafb'
+        }
     },
     timeLine:{
         position:'relative',
@@ -150,6 +165,7 @@ const Resume = () => {
             <Typography variant="h4" align="center" className={classes.heading}>
                 Working Experience
             </Typography>
+            
             <Box component="div" className={classes.timeLine}>
                 {ExpDetails.map((exp,index)=>
                     <React.Fragment key={index}>
@@ -173,7 +189,12 @@ const Resume = () => {
                     </React.Fragment>
                 )}
             </Box>
+            <Fab variant="extended" className={classes.download} >
+                <CloudDownloadIcon  style={{marginRight:'1rem',width:'1.8rem',fill:'#fff'}}/>
+                    Download Resume
+            </Fab>
         </Box>
+
     )
 }
 
