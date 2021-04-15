@@ -51,7 +51,7 @@ const useStyle = makeStyles(theme=>({
         description:'Portfolio',
         imageUrl:`${project4}`,
         gitUrl:'https://github.com/nadim-khan/react-portfoli',
-        appUrl:'https://trainmenow.herokuapp.com/',
+        appUrl:'https://nadsontech.herokuapp.com/',
         isDeployed:true
     },
     {
