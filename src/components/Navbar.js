@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import SwipeableDrawer  from '@material-ui/core/SwipeableDrawer';
-
+import MobileRightMenuSlider from '@material-ui/core/Drawer';
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import {
     AppBar,
     Toolbar,
@@ -29,10 +29,10 @@ import Footer from './Footer';
 // CSS STYLES
 const useStyles = makeStyles(theme=>({
     menuSliderContainer: {
-        width: '100vw',
+        width: 250,
         background: "black",
         height: "100%",
-        // borderLeft:'2px solid #b5dae4'
+        justifyContent:"center"
     },
     avatar: {
         display: "block",
@@ -40,11 +40,11 @@ const useStyles = makeStyles(theme=>({
         width: theme.spacing(13),
         height: theme.spacing(13)
     },
-    list:{
-
-    },
     listItem: {
         color: "#b5dae4"
+    },
+    rightSideButton:{
+
     }
 
 }));
@@ -67,11 +67,11 @@ const menuItems = [
         listText: "Portfolio",
         listPath:'/portfolio'
     },
-    // {
-    //     listIcon: <ContactMail/>,
-    //     listText: "Projects",
-    //     listPath:'/projects'
-    // },
+    {
+        listIcon: <ContactMail/>,
+        listText: "Projects",
+        listPath:'/projects'
+    },
     {
         listIcon: <ContactMail/>,
         listText: "Contacts",
@@ -96,7 +96,7 @@ const toggleSlider = (slider, open) => () => {
         <Box className={classes.menuSliderContainer} component="div" onClick={toggleSlider(slider,false)}>
             <Avatar className={classes.avatar} src={avatar} alt="Glenn Java" />
             <Divider/>
-            <List className={classes.list}>
+            <List>
                 {menuItems.map((listItem, key) => (
                     <ListItem button key={key} component={Link} to={listItem.listPath}>
                         <ListItemIcon className={classes.listItem}>
@@ -106,6 +106,7 @@ const toggleSlider = (slider, open) => () => {
                     </ListItem>
                 ))} 
             </List>
+            
         </Box> 
     )
     return (
@@ -113,14 +114,15 @@ const toggleSlider = (slider, open) => () => {
             <Box component="nav">
                 <AppBar position ="static" style={{background: "#222"}}>
                     <Toolbar>
-                        <IconButton onClick={toggleSlider("right", true)}>
-                            <ArrowBack style={{color: "#61dafb"}}/>                    
-                        </IconButton>
-                        <Typography variant="h5" style={{color:"#7fc8db"}}>Portfolio</Typography>
-                        <SwipeableDrawer anchor="left" open={state.right}  onOpen={toggleSlider("right", true)} onClose={toggleSlider("right", false)}>
+                        
+                        <Typography variant="h5" style={{color:"#7fc8db",flex:1}}>Nadeem Khan</Typography>
+                        <MobileRightMenuSlider anchor="right" open={state.right} onClose={toggleSlider("right", false)}>
                             {sideList("right")}
                             <Footer/>
-                        </SwipeableDrawer>
+                        </MobileRightMenuSlider>
+                        <IconButton onClick={toggleSlider("right", true)}>
+                            <MenuOpenIcon style={{color: "#61dafb"}}/>                    
+                        </IconButton>
                     </Toolbar>
                 </AppBar>
             </Box>
