@@ -46,7 +46,7 @@ const Footer = () => {
                 break;
             }
             case 1 :{
-                buttonEl.href = 'https://wa.me/7024019995/?text=urlencodedtext';
+                buttonEl.href = 'https://wa.me/917024019995/?text=urlencodedtext';
                 callNode.appendChild(buttonEl);
                 buttonEl.click();
                 break;
