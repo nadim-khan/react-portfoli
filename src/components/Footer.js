@@ -9,18 +9,22 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import CallIcon from '@material-ui/icons/Call';
 
 const useStyles=makeStyles(theme=>({
     root:{
         '& .MuiBottomNavigationAction-root':{
             minWidth:0,
-            maxWidth:250
+            maxWidth:250,
+            
         },
         '& .MuiSvgIcon-root':{
+            paddingTop:'0.3rem',
             fill:'#b5dae4',
+            fontSize:'1.8rem',
             '&:hover':{
                 fill:'#61dafb',
-                fontSize:'1.8rem',
+                fontSize:'1.9rem',
                 
             }
         }
@@ -30,7 +34,13 @@ const useStyles=makeStyles(theme=>({
 const Footer = () => {
     const classes = useStyles();
     const [value, setValue] = useState('recents');
-
+    const makeCall = () => {
+        const callNode = document.getElementById('call');
+        var buttonEl = document.createElement("a");
+	    buttonEl.href = 'tel:+91-7024019995';
+        callNode.appendChild(buttonEl);
+        buttonEl.click();
+    }
     const handleChange = (event, newValue) => {
         setValue(newValue);
         switch(newValue){
@@ -59,6 +69,10 @@ const Footer = () => {
 
     };
     return (
+        <>
+        <BottomNavigation id="call" value={value} onChange={makeCall} className={classes.root} width="auto" style={{background:'#32CD32'}}>
+            <BottomNavigationAction label="Call" style={{padding:0}} icon={<CallIcon/>}/>
+        </BottomNavigation>
         <BottomNavigation value={value} onChange={handleChange} className={classes.root} width="auto" style={{background:'#222'}}>
             <BottomNavigationAction label="Facebook" style={{padding:0}} icon={<FacebookIcon/>}/>
             <BottomNavigationAction label="Twitter" style={{padding:0}} icon={<TwitterIcon/>}/>
@@ -66,6 +80,7 @@ const Footer = () => {
             <BottomNavigationAction label="Github" style={{padding:0}} icon={<GitHubIcon/>}/>
             <BottomNavigationAction label="Linkedin" style={{padding:0}} icon={<LinkedInIcon/>}/>
         </BottomNavigation>
+        </>
     )
 }
 
