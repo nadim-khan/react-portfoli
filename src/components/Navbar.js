@@ -17,7 +17,6 @@ import {
     ListItemIcon
 } from "@material-ui/core"
 import {
-    ArrowBack,
     AssignmentInd,
     Home,
     Apps,
